@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, computed, type Ref } from 'vue'; // Import the onMounted lifecycle hook
-import axios from 'axios'
+//import axios from 'axios'
 
 interface Kleidung {
   kleidungName: string;
@@ -13,28 +13,28 @@ interface Kleidung {
 
 const kleidungen: Ref<Kleidung[]> = ref([])
 const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
-//const endpoint = baseUrl+'/api/suche'
+const endpoint = baseUrl+'/api/suche'
 
 const searchName = ref('')
 const searchGroesse = ref('')
 const searchLager = ref('')
 
-function requestKleidungen() {
+/*function requestKleidungen() {
   const endpoint = baseUrl+'/api/suche';
   axios.get(endpoint)
       .then((response) => {
         kleidungen.value = response.data;
       })
       .catch((error) => console.log(error));
-}
-/*function requestKleidungen(): void {
+}*/
+function requestKleidungen(): void {
   fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         kleidungen.value = data;
       })
       .catch((error) => console.log(error));
-}*/
+}
 
 
 const filteredKleidungen = computed(() => {
