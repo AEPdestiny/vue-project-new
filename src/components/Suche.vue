@@ -13,14 +13,14 @@ interface Kleidung {
 
 const kleidungen: Ref<Kleidung[]> = ref([])
 const baseUrl = import.meta.env.VITE_APP_BACKEND_BASE_URL
-const endpoint = baseUrl+'/api/suche'
+//const endpoint = baseUrl+'/api/suche'
 
 const searchName = ref('')
 const searchGroesse = ref('')
 const searchLager = ref('')
 
 function requestKleidungen() {
-  const endpoint = "http://localhost:8080/api/suche";
+  const endpoint = baseUrl+'/api/suche';
   axios.get(endpoint)
       .then((response) => {
         kleidungen.value = response.data;
