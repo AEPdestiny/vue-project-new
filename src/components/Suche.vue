@@ -4,6 +4,7 @@ import { onMounted, ref, computed, type Ref } from 'vue';
 interface Kleidung {
   kleidungName: string;
   groesse: string;
+  anzahl: number;
   lager: number;
 }
 
@@ -17,12 +18,7 @@ const searchName = ref('')
 const searchGroesse = ref('')
 const searchLager = ref('')
 
-const requestOptions ={
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
+
 function requestKleidungen(): void {
   fetch(endpoint)
       .then((response) => response.json())
@@ -59,12 +55,14 @@ onMounted(() => requestKleidungen());
         <th>Name</th>
         <th>Größe</th>
         <th>Anzahl</th>
+        <th>Lager</th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="kleidung in filteredKleidungen" :key="kleidung.kleidungName">
         <td>{{ kleidung.kleidungName }}</td>
         <td>{{ kleidung.groesse }}</td>
+        <td>{{ kleidung.anzahl }}</td>
         <td>{{ kleidung.lager }}</td>
       </tr>
       </tbody>
