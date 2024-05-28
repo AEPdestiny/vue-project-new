@@ -26,6 +26,13 @@ function requestKleidungen(): void {
         kleidungen.value = data;
       })
       .catch((error) => console.log(error));
+
+  // async created() {
+  //   // GET request using fetch with async/await
+  //   const response = await fetch("https://api.npms.io/v2/search?q=vue");
+  //   const data = await response.json();
+  //   this.totalVuePackages = data.total;
+  // }
 }
 
 const filteredKleidungen = computed(() => {
