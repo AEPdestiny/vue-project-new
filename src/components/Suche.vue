@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref, computed, type Ref } from 'vue';
+import { onMounted, ref, computed, type Ref } from 'vue'; // Import the onMounted lifecycle hook
+import axios from 'axios'
 
 interface Kleidung {
   kleidungName: string;
@@ -18,22 +19,23 @@ const searchName = ref('')
 const searchGroesse = ref('')
 const searchLager = ref('')
 
-
-function requestKleidungen(): void {
+function requestKleidungen() {
+  const endpoint = "http://localhost:8080/api/suche";
+  axios.get(endpoint)
+      .then((response) => {
+        kleidungen.value = response.data;
+      })
+      .catch((error) => console.log(error));
+}
+/*function requestKleidungen(): void {
   fetch(endpoint)
       .then((response) => response.json())
       .then((data) => {
         kleidungen.value = data;
       })
       .catch((error) => console.log(error));
+}*/
 
-  // async created() {
-  //   // GET request using fetch with async/await
-  //   const response = await fetch("https://api.npms.io/v2/search?q=vue");
-  //   const data = await response.json();
-  //   this.totalVuePackages = data.total;
-  // }
-}
 
 const filteredKleidungen = computed(() => {
   return kleidungen.value.filter(kleidung => {
